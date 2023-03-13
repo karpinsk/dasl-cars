@@ -1,0 +1,68 @@
+<div class="list row">
+  <div class="col-md-6">
+    <h4>Cars list</h4>
+    <label for="brand">Brand</label>
+    <select
+      class="form-control"
+      id="brand"
+      [(ngModel)]="selectedBrand"
+      (change)="onBrandChange()"
+    >
+      <option value="">All</option>
+      <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+    </select>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let car of cars; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveCar(car, carId)"
+      >
+        Model: {{ car.model }}
+        <br />
+        VIN: {{ car.vin }}
+        <br />
+        Registration number: {{ car.reg_num }}
+        <br />
+        Brand: {{ (car?.producer)!.brand }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-md-6">
+    <app-car-detail
+      [viewMode]="true"
+      [currentCar]="currentCar"
+    ></app-car-detail>
+  </div>
+</div>
+
+<!-- if showReport is true display word "Print" as button name, else display "Hide" -->
+<button class="btn btn-primary" (click)="print()">
+  {{ showReport ? "Hide" : "Print" }}
+</button>
+
+<div id="print-preview" style="display: block">
+  <h2>Car list</h2>
+  <p>Selected brand: {{ selectedBrand || "All" }}</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Model</th>
+        <th>VIN</th>
+        <th>Registration number</th>
+        <th>Brand</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of cars">
+        <td>{{ carId }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.vin }}</td>
+        <td>{{ car.reg_num }}</td>
+        <td>{{ (car?.producer)!.brand }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

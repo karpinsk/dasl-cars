@@ -1,0 +1,97 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="title">VIN*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="vin"
+          minlength="17"
+          maxlength="17"
+          required
+          [(ngModel)]="car.vin"
+          name="vin"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="model">Registration number*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="reg_num"
+          required
+          [(ngModel)]="car.reg_num"
+          name="reg_num"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="model">Model*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="model"
+          required
+          [(ngModel)]="car.model"
+          name="model"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="brand">Brand*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="brand"
+          required
+          [(ngModel)]="car.brand"
+          name="brand"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="country"
+          required
+          [(ngModel)]="car.country"
+          name="country"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="year">Year</label>
+        <input
+          type="number"
+          class="form-control"
+          id="year"
+          [(ngModel)]="car.year"
+          name="year"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="color">Color</label>
+        <input
+          type="text"
+          class="form-control"
+          id="color"
+          [(ngModel)]="car.color"
+          name="color"
+        />
+      </div>
+
+      <button
+        (click)="saveCar()"
+        class="btn btn-success"
+        [disabled]="!areRequiredFieldsFilled()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

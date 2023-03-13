@@ -1,0 +1,136 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentCar?.car_id">
+    <table>
+      <tr>
+        <th>VIN:</th>
+        <th>{{ currentCar.vin }}</th>
+      </tr>
+      <tr>
+        <th>Registration number:</th>
+        <th>{{ currentCar.reg_num }}</th>
+      </tr>
+      <tr>
+        <th>Model:</th>
+        <th>{{ currentCar.model }}</th>
+      </tr>
+      <tr>
+        <th>Brand:</th>
+        <th>{{ currentCar.producer?.brand }}</th>
+      </tr>
+      <tr>
+        <th>Country:</th>
+        <th>{{ currentCar.producer?.country }}</th>
+      </tr>
+      <tr>
+        <th>Year:</th>
+        <th>{{ currentCar.year }}</th>
+      </tr>
+      <tr>
+        <th>Color</th>
+        <th>{{ currentCar.color }}</th>
+      </tr>
+    </table>
+    <div>
+      <button
+        class="badge badge-warning"
+        routerLink="/cars/{{ currentCar.car_id }}"
+      >
+        Update
+      </button>
+      <button class="badge badge-danger mr-2" (click)="deleteCar()">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentCar.car_id" class="edit-form">
+    <h4>Car</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">VIN*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="vin"
+          required
+          [(ngModel)]="currentCar.vin"
+          name="vin"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="model">Registration number*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="reg_num"
+          required
+          [(ngModel)]="currentCar.reg_num"
+          name="reg_num"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="model">Model*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="model"
+          required
+          [(ngModel)]="currentCar.model"
+          name="model"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="brand">Brand*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="brand"
+          required
+          [(ngModel)]="currentCar!.producer!.brand"
+          name="brand"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="country"
+          required
+          [(ngModel)]="currentCar!.producer!.country"
+          name="country"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="year">Year</label>
+        <input
+          type="number"
+          class="form-control"
+          id="year"
+          [(ngModel)]="currentCar.year"
+          name="year"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="color">Color</label>
+        <input
+          type="text"
+          class="form-control"
+          id="color"
+          [(ngModel)]="currentCar.color"
+          name="color"
+        />
+      </div>
+    </form>
+
+    <button type="submit" (click)="updateCar()">Update</button>
+  </div>
+</ng-template>
